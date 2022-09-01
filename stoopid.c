@@ -21,24 +21,25 @@ int getSize(char *str) {
     return i;
 }
 
-char* split(char* str, char delim, int index){
-    char* val;
+char* split(char* str, char splitter, int index) {
+    char* out = malloc(256);
+
     for(int i = 0; i < getSize(str); i++) {
-        if(str[i] == delim) {
+        if(str[i] == splitter) {
+            i++;
             int k = 0;
-            for(int j = i + 1; j < getSize(str); j++) {
-                printf("%c", str[j]);
-                if(str[j] == delim || j >= getSize(str) - 1) {
-                    printf("abbruch");
-                    return val;
+            for(int j = i; j < getSize(str); j++) {
+                if(str[j] == splitter) {
+                    out[k] = "\n";
+                    return out;
                 }
-                printf("joe");
-                val[k] = str[j];
+
+                out[k] = str[j];
                 k++;
             }
         }
     }
-    	
+
     return NULL;
 }
 
