@@ -21,18 +21,19 @@ int getSize(char *str) {
     return i;
 }
 
-char* split(char* str, char splitter, int index) {
+char** split(char* str, char splitter, int index) {
     char* out = malloc(256);
+    char** outPoint = &out;
 
     for(int i = 0; i < getSize(str); i++) {
         if(str[i] == splitter) {
             i++;
             int k = 0;
-            
+
             for(int j = i; j < getSize(str); j++) {
                 if(str[j] == splitter) {
                     out[k] = "\n";
-                    return out;
+                    return outPoint;
                 }
 
                 out[k] = str[j];
