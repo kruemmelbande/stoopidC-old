@@ -41,7 +41,7 @@ int main(int argc, char **argv){
     int size=0;
     do {
             ch = fgetc(program);
-            if (ch!=EOF or ch!='\n' or ch!='\t' or ch!=' '){
+            if (ch!=EOF || ch!='\n' || ch!='\t' || ch!=' '){
                 size++;}
             size++;
             printf("%c",ch);
