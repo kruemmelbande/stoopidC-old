@@ -56,7 +56,6 @@ int main(int argc, char **argv){
 
 
 
-    //size=10;//remove pls
     char buf[lineLimit];
     char buf2[size][lineLimit];
     fclose(program);
