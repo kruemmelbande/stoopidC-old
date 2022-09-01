@@ -23,20 +23,22 @@ int getSize(char *str) {
 
 char* split(char* str, char delim, int index){
     char* val;
-
     for(int i = 0; i < getSize(str); i++) {
         if(str[i] == delim) {
             int k = 0;
-            for(int j = i; j < getSize(str); j++) {
-                if(str[j] == delim || j < getSize(str) - 1) {
+            for(int j = i + 1; j < getSize(str); j++) {
+                printf("%c", str[j]);
+                if(str[j] == delim || j >= getSize(str) - 1) {
+                    printf("abbruch");
                     return val;
                 }
+                printf("joe");
                 val[k] = str[j];
                 k++;
             }
         }
     }
-
+    	
     return NULL;
 }
 
@@ -85,7 +87,7 @@ int main(int argc, char **argv) {
         printf("%s", buf2[i]);
         if (startswith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
-            printf("you should print %s\n", split(buf2[i], ":", 1));
+            printf("you should print %s\n", split(buf2[i], ':', 1));
         }
         if (startswith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
