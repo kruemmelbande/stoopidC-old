@@ -52,8 +52,6 @@ int main(int argc, char **argv) {
     }
     printf("%d\n",size);
 
-
-
     char buf[lineLimit];
     char buf2[size][lineLimit];
     fclose(program);
@@ -72,7 +70,6 @@ int main(int argc, char **argv) {
         if (startswith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
         }
-
     }
 
 }
