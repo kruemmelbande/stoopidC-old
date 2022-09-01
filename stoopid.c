@@ -8,49 +8,54 @@
 #include <unistd.h>
 
 
-int startswith(char *str, char *pre)
-{
+int startswith(char *str, char *pre) {
     size_t lenpre = strlen(pre),
            lenstr = strlen(str);
     return lenstr < lenpre ? 0 : strncmp(pre, str, lenpre) == 0;
 }
 
-int getSize(char *str)
-{
+int getSize(char *str) {
     int i = 0;
     while (str[i] != '\0')
         i++;
     return i;
 }
-char* split(char *str, char *delim, int index){
-    int i = 0,
-        count = 0;
-    char *ret;
-    int size = getSize(str);
-    while (i < size)
-    {
-        if (str[i] == delim[0])
-        {
-            count++;
-            if (count == index)
-            {
-                ret = (char*)malloc(sizeof(char) * (i + 1));
-                strncpy(ret, str, i);
-                ret[i] = '\0';
-                return ret;
+
+char* split(char* str, char splitter, int index) {
+    char* out = malloc(256);
+
+    for(int i = 0; i < getSize(str); i++) {
+        if(str[i] == splitter) {
+            index--;
+            if(index == 0) {
+                i++;
             }
         }
-        i++;
+
+        if(index == 0) {
+            int k = 0;
+
+            for(int j = i; j < getSize(str); j++) {
+                if(str[j] == splitter || j + 1 >= getSize(str)) {
+                    out[k] = '\0';
+                    return out;
+                }
+
+                out[k] = str[j];
+                k++;
+            }
+        }
     }
+
     return NULL;
 }
 
 
-int main(int argc, char **argv){
+int main(int argc, char **argv) {
     static int lineLimit =256;
     //get the filename from the args
     char *filename = argv[1];
-    if (filename == NULL){
+    if (filename == NULL) {
         filename="test.stpd";
     }
     //open the file
@@ -76,33 +81,28 @@ int main(int argc, char **argv){
     }
     printf("%d\n",size);
 
-
-
     char buf[lineLimit];
     char buf2[size][lineLimit];
     fclose(program);
     program=fopen(filename, "r");
     
-    for (int i = 0; i < size; i++)
-    {  
+    for (int i = 0; i < size; i++) {  
         fgets(buf, lineLimit, program);
        
         strcpy(buf2[i], buf);
     }
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         printf("%s", buf2[i]);
-        if (startswith(buf2[i], "out"))
-        {
+        if (startswith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
+            printf("you should print %s\n", split(buf2[i], ':', 0));
+            printf("you should print %s\n", split(buf2[i], ':', 1));
+            printf("you should print %s\n", split(buf2[i], ':', 2));
+            printf("you should print %s\n", split(buf2[i], ':', 3));
         }
-        if (startswith(buf2[i], "var"))
-        {
+        if (startswith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
         }
-
     }
 
 }
-    
-
