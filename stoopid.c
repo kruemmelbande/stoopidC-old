@@ -25,6 +25,7 @@ int getSize(char *str)
 
 
 int main(int argc, char **argv){
+    static int lineLimit =256;
     //get the filename from the args
     char *filename = argv[1];
     if (filename == NULL){
@@ -39,23 +40,30 @@ int main(int argc, char **argv){
         return 1;
     }
     int size=0;
-    do {
-            ch = fgetc(program);
-            if (ch!=EOF || ch!='\n' || ch!='\t' || ch!=' '){
-                size++;}
+
+    fclose(program);
+    program = fopen(filename, "r");
+    char sizebuf[1024];
+    while(1) {
+            fgets(sizebuf,1024,program);
             size++;
-            printf("%c",ch);
-    } while (ch != EOF);
-    printf("\n%d\n",size);
-    
-    char buf[256];
-    char buf2[size][256];
+            //check for end of file
+            if (feof(program)){
+                break;
+            }
+    }
+    printf("%d\n",size);
+
+
+
+    char buf[lineLimit];
+    char buf2[size][lineLimit];
     fclose(program);
     program=fopen(filename, "r");
     
     for (int i = 0; i < size; i++)
     {  
-        fgets(buf, size, program);
+        fgets(buf, lineLimit, program);
        
         strcpy(buf2[i], buf);
     }
