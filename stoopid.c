@@ -95,7 +95,7 @@ char ** split(char *str, char delim){
             array[index][i-start]=str[i];
         }
         array[index][end-start]='\0';
-        index++;1
+        index++;
         start=end+1;
         end=start;
     }
