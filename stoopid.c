@@ -28,6 +28,7 @@ char* split(char* str, char splitter, int index) {
         if(str[i] == splitter) {
             i++;
             int k = 0;
+            
             for(int j = i; j < getSize(str); j++) {
                 if(str[j] == splitter) {
                     out[k] = "\n";
