@@ -21,19 +21,24 @@ int getSize(char *str) {
     return i;
 }
 
-char** split(char* str, char splitter, int index) {
+char* split(char* str, char splitter, int index) {
     char* out = malloc(256);
-    char** outPoint = &out;
 
     for(int i = 0; i < getSize(str); i++) {
         if(str[i] == splitter) {
-            i++;
+            index--;
+            if(index == 0) {
+                i++;
+            }
+        }
+
+        if(index == 0) {
             int k = 0;
 
             for(int j = i; j < getSize(str); j++) {
-                if(str[j] == splitter) {
-                    out[k] = "\n";
-                    return outPoint;
+                if(str[j] == splitter || j + 1 >= getSize(str)) {
+                    out[k] = '\0';
+                    return out;
                 }
 
                 out[k] = str[j];
@@ -90,7 +95,10 @@ int main(int argc, char **argv) {
         printf("%s", buf2[i]);
         if (startswith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
+            printf("you should print %s\n", split(buf2[i], ':', 0));
             printf("you should print %s\n", split(buf2[i], ':', 1));
+            printf("you should print %s\n", split(buf2[i], ':', 2));
+            printf("you should print %s\n", split(buf2[i], ':', 3));
         }
         if (startswith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
