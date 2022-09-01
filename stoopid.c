@@ -20,6 +20,28 @@ int getSize(char *str) {
         i++;
     return i;
 }
+char* split(char *str, char *delim, int index){
+    int i = 0,
+        count = 0;
+    char *ret;
+    int size = getSize(str);
+    while (i < size)
+    {
+        if (str[i] == delim[0])
+        {
+            count++;
+            if (count == index)
+            {
+                ret = (char*)malloc(sizeof(char) * (i + 1));
+                strncpy(ret, str, i);
+                ret[i] = '\0';
+                return ret;
+            }
+        }
+        i++;
+    }
+    return NULL;
+}
 
 
 int main(int argc, char **argv) {
