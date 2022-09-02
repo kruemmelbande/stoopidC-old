@@ -2,19 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-//we need them args
 #include <stdarg.h>
 #include <time.h>
 #include <unistd.h>
 
 
-int startswith(char *str, char *pre) {
+int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
            lenstr = strlen(str);
     return lenstr < lenpre ? 0 : strncmp(pre, str, lenpre) == 0;
 }
 
-int getSize(char *str) {
+int getSize(char* str) {
     int i = 0;
     while (str[i] != '\0')
         i++;
@@ -93,14 +92,14 @@ int main(int argc, char **argv) {
     }
     for (int i = 0; i < size; i++) {
         printf("%s", buf2[i]);
-        if (startswith(buf2[i], "out")) {
+        if (startsWith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
             printf("you should print %s\n", split(buf2[i], ':', 0));
             printf("you should print %s\n", split(buf2[i], ':', 1));
             printf("you should print %s\n", split(buf2[i], ':', 2));
             printf("you should print %s\n", split(buf2[i], ':', 3));
         }
-        if (startswith(buf2[i], "var")) {
+        if (startsWith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
         }
     }
