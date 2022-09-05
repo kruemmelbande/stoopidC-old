@@ -92,7 +92,6 @@ int main(int argc, char** argv) {
     }
 
     for (int i = 0; i < size; i++) {
-        printf("%s", buf2[i]);
         if (startsWith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
         }
