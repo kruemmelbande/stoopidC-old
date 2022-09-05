@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
             printf("Test: var\n");
         } else if(!strcmp(currentKeyword, "out")) {
             printf("Test: out\n");
-        } else if(!startsWith(buf2[i], "#")) {
+        } else if(!startsWith(buf2[i], "#") && !strcmp(buf2[i], " ")) {
             printf("Keyword %s not Found\n", currentKeyword);
             return 1;
         }
