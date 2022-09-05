@@ -6,8 +6,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "lib.h"
-
-static int lineLimit = 256;
+#include "global.h"
 
 int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
