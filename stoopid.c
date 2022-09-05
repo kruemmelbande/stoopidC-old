@@ -6,7 +6,7 @@
 #include <time.h>
 #include <unistd.h>
 
-static int lineLimit =256;
+static int lineLimit = 256;
 
 int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
@@ -50,7 +50,6 @@ char* split(char* str, char splitter, int index) {
     return NULL;
 }
 
-
 int main(int argc, char** argv) {
 
     //get the filename from the args
@@ -93,12 +92,15 @@ int main(int argc, char** argv) {
     }
 
     for (int i = 0; i < size; i++) {
-        if (startsWith(buf2[i], "out")) {
-            printf("print statement found in line %d \n",i+1);
-        }
-        if (startsWith(buf2[i], "var")) {
-            printf("variable declaration found in line %d \n",i+1);
+        char* currentKeyword = split(buf2[i], ':', 0);
+            
+        if(!strcmp(currentKeyword, "var")) {
+            printf("Test: var\n");
+        } else if(!strcmp(currentKeyword, "out")) {
+            printf("Test: out\n");
+        } else if(!startsWith(buf2[i], "#")) {
+            printf("Keyword %s not Found\n", currentKeyword);
+            return 1;
         }
     }
-
 }
