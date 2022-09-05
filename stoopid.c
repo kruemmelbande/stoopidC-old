@@ -79,7 +79,6 @@ int main(int argc, char** argv) {
             break;
         }
     }
-    printf("%d\n",size);
 
     char buf[lineLimit];
     char buf2[size][lineLimit];
@@ -91,7 +90,7 @@ int main(int argc, char** argv) {
        
         strcpy(buf2[i], buf);
     }
-    
+
     for (int i = 0; i < size; i++) {
         printf("%s", buf2[i]);
         if (startsWith(buf2[i], "out")) {
