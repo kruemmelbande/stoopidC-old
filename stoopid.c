@@ -50,12 +50,12 @@ char* split(char* str, char splitter, int index) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     static int lineLimit = 256;
     //get the filename from the args
-    char *filename = argv[1];
+    char* filename = argv[1];
     if (filename == NULL) {
-        filename="test.stpd";
+        filename = "test.stpd";
     }
     //open the file
     FILE* program;
@@ -71,19 +71,19 @@ int main(int argc, char **argv) {
     program = fopen(filename, "r");
     char sizebuf[1024];
     while(1) {
-            fgets(sizebuf,1024,program);
-            size++;
-            //check for end of file
-            if (feof(program)){
-                break;
-            }
+        fgets(sizebuf, 1024, program);
+        size++;
+        //check for end of file
+        if (feof(program)){
+            break;
+        }
     }
     printf("%d\n",size);
 
     char buf[lineLimit];
     char buf2[size][lineLimit];
     fclose(program);
-    program=fopen(filename, "r");
+    program = fopen(filename, "r");
     
     for (int i = 0; i < size; i++) {  
         fgets(buf, lineLimit, program);
