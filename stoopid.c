@@ -94,10 +94,6 @@ int main(int argc, char **argv) {
         printf("%s", buf2[i]);
         if (startsWith(buf2[i], "out")) {
             printf("print statement found in line %d \n",i+1);
-            printf("you should print %s\n", split(buf2[i], ':', 0));
-            printf("you should print %s\n", split(buf2[i], ':', 1));
-            printf("you should print %s\n", split(buf2[i], ':', 2));
-            printf("you should print %s\n", split(buf2[i], ':', 3));
         }
         if (startsWith(buf2[i], "var")) {
             printf("variable declaration found in line %d \n",i+1);
