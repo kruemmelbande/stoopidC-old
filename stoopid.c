@@ -52,12 +52,13 @@ char* split(char* str, char splitter, int index) {
 
 int main(int argc, char** argv) {
     static int lineLimit = 256;
-    //get the filename from the args
+    // get the filename from the args
     char* filename = argv[1];
     if (filename == NULL) {
         filename = "test.stpd";
     }
-    //open the file
+
+    // open the file
     FILE* program;
     char ch;
     program = fopen(filename, "r");
@@ -73,7 +74,7 @@ int main(int argc, char** argv) {
     while(1) {
         fgets(sizebuf, 1024, program);
         size++;
-        //check for end of file
+        // check for end of file
         if (feof(program)){
             break;
         }
