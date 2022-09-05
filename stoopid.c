@@ -6,6 +6,7 @@
 #include <time.h>
 #include <unistd.h>
 
+static int lineLimit =256;
 
 int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
@@ -21,7 +22,7 @@ int getSize(char* str) {
 }
 
 char* split(char* str, char splitter, int index) {
-    char* out = malloc(256);
+    char* out = malloc(lineLimit);
 
     for(int i = 0; i < getSize(str); i++) {
         if(str[i] == splitter) {
@@ -51,8 +52,8 @@ char* split(char* str, char splitter, int index) {
 
 
 int main(int argc, char** argv) {
-    static int lineLimit = 256;
-    // get the filename from the args
+
+    //get the filename from the args
     char* filename = argv[1];
     if (filename == NULL) {
         filename = "test.stpd";
@@ -70,11 +71,11 @@ int main(int argc, char** argv) {
 
     fclose(program);
     program = fopen(filename, "r");
-    char sizebuf[1024];
+    char sizebuf[lineLimit];
     while(1) {
-        fgets(sizebuf, 1024, program);
+        fgets(sizebuf, lineLimit, program);
         size++;
-        // check for end of file
+        //check for end of file
         if (feof(program)){
             break;
         }
