@@ -2,20 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-//we need them args
 #include <stdarg.h>
 #include <time.h>
 #include <unistd.h>
 
-static int lineLimit =256;
+static int lineLimit = 256;
 
-int startswith(char *str, char *pre) {
+int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
            lenstr = strlen(str);
     return lenstr < lenpre ? 0 : strncmp(pre, str, lenpre) == 0;
 }
 
-int getSize(char *str) {
+int getSize(char* str) {
     int i = 0;
     while (str[i] != '\0')
         i++;
@@ -51,15 +50,15 @@ char* split(char* str, char splitter, int index) {
     return NULL;
 }
 
-
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 
     //get the filename from the args
-    char *filename = argv[1];
+    char* filename = argv[1];
     if (filename == NULL) {
-        filename="test.stpd";
+        filename = "test.stpd";
     }
-    //open the file
+
+    // open the file
     FILE* program;
     char ch;
     program = fopen(filename, "r");
@@ -73,37 +72,35 @@ int main(int argc, char **argv) {
     program = fopen(filename, "r");
     char sizebuf[lineLimit];
     while(1) {
-            fgets(sizebuf,lineLimit,program);
-            size++;
-            //check for end of file
-            if (feof(program)){
-                break;
-            }
+        fgets(sizebuf, lineLimit, program);
+        size++;
+        //check for end of file
+        if (feof(program)){
+            break;
+        }
     }
-    printf("%d\n",size);
 
     char buf[lineLimit];
     char buf2[size][lineLimit];
     fclose(program);
-    program=fopen(filename, "r");
+    program = fopen(filename, "r");
     
     for (int i = 0; i < size; i++) {  
         fgets(buf, lineLimit, program);
        
         strcpy(buf2[i], buf);
     }
+
     for (int i = 0; i < size; i++) {
-        printf("%s", buf2[i]);
-        if (startswith(buf2[i], "out")) {
-            printf("print statement found in line %d \n",i+1);
-            printf("you should print %s\n", split(buf2[i], ':', 0));
-            printf("you should print %s\n", split(buf2[i], ':', 1));
-            printf("you should print %s\n", split(buf2[i], ':', 2));
-            printf("you should print %s\n", split(buf2[i], ':', 3));
-        }
-        if (startswith(buf2[i], "var")) {
-            printf("variable declaration found in line %d \n",i+1);
+        char* currentKeyword = split(buf2[i], ':', 0);
+            
+        if(!strcmp(currentKeyword, "var")) {
+            printf("Test: var\n");
+        } else if(!strcmp(currentKeyword, "out")) {
+            printf("Test: out\n");
+        } else if(!startsWith(buf2[i], "#")) {
+            printf("Keyword %s not Found\n", currentKeyword);
+            return 1;
         }
     }
-
 }
