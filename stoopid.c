@@ -51,7 +51,7 @@ char* split(char* str, char splitter, int index) {
 
 
 int main(int argc, char **argv) {
-    static int lineLimit =256;
+    static int lineLimit = 256;
     //get the filename from the args
     char *filename = argv[1];
     if (filename == NULL) {
