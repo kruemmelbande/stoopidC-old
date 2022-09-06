@@ -1,4 +1,6 @@
 @echo off
+mkdir build
+
 echo compiling scripts...
 cd .\src\
 gcc -Wall -c lib.c
@@ -16,6 +18,7 @@ echo:
 cd ..\src\
 del lib.o
 del main.o
+del global.o
 echo successfully build exe
 echo:
 @echo on
