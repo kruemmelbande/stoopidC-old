@@ -6,9 +6,6 @@
 #include "variables.h"
 
 int main(int argc, char** argv) {
-
-    init();
-
     //get the filename from the args
     char* filename = argv[1];
     if (filename == NULL) {
@@ -52,6 +49,7 @@ int main(int argc, char** argv) {
             
         if(!strcmp(currentKeyword, "var")) {
             printf("Test: var\n");
+            addVar("joe", "mama");
         } else if(!strcmp(currentKeyword, "out")) {
             printf("Test: out\n");
         } else if(!startsWith(buf2[i], "#") && !strcmp(buf2[i], " ")) {
