@@ -3,8 +3,11 @@
 #include <string.h>
 #include "lib.h"
 #include "global.h"
+#include "variables.h"
 
 int main(int argc, char** argv) {
+
+    init();
 
     //get the filename from the args
     char* filename = argv[1];
