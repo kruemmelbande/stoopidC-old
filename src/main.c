@@ -3,7 +3,6 @@
 #include <string.h>
 #include "lib.h"
 #include "global.h"
-#include "variables.h"
 
 int main(int argc, char** argv) {
     //get the filename from the args
@@ -49,7 +48,6 @@ int main(int argc, char** argv) {
             
         if(!strcmp(currentKeyword, "var")) {
             printf("Test: var\n");
-            addVar("joe", "mama");
         } else if(!strcmp(currentKeyword, "out")) {
             printf("Test: out\n");
         } else if(!startsWith(buf2[i], "#") && !strcmp(buf2[i], " ")) {
