@@ -45,9 +45,9 @@ char* split(char* str, char splitter, int index) {
 
                 while (str[k + i] != splitter && str[k + i + 1] != '\0') {
                     out[k - 1] = str[k + i];
-                    printf("out: %s\n", out);
                     k++;
                 }
+                printf("out: %s\n", out);
                 out[k] = '\0';
                 return out;
             }
