@@ -20,25 +20,36 @@ int getSize(char* str) {
 char* split(char* str, char splitter, int index) {
     char* out = malloc(lineLimit);
 
-    for(int i = 0; i < getSize(str); i++) {
-        if(str[i] == splitter) {
-            index--;
-            if(index == 0) {
-                i++;
+    if(index == 0) {
+        int j = 0;
+    
+        for(int i = 0; i < getSize(str); i++) {
+            if(str[i] == splitter || str[i] == '\0') {
+                out[j] = '\0';
+                return out;
             }
+
+            out[j] = str[i];
+            j++;
         }
+    } else {
+        int j = index;
 
-        if(index == 0) {
-            int k = 0;
+        for(int i = 0; i < getSize(str); i++) {
+            if(str[i] == splitter) {
+                j -= 1;
+            }
 
-            for(int j = i; j < getSize(str); j++) {
-                if(str[j] == splitter || j + 1 >= getSize(str)) {
-                    out[k] = '\0';
-                    return out;
+            if(j == 0) {
+                int k = 1;
+
+                while (str[k + i] != splitter && str[k + i] != '\0') {
+                    out[k - 1] = str[k + i];
+                    k++;
                 }
 
-                out[k] = str[j];
-                k++;
+                out[k] = '\0';
+                return out;
             }
         }
     }

@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "global.h"
 
 typedef struct Variable {
@@ -7,8 +8,9 @@ typedef struct Variable {
     char* value;
 } Variable;
 
+enum { MAX_SIZE = 64 };
 int currentVar = 0;
-Variable variables[64];
+Variable variables[MAX_SIZE];
 
 void newVar(char* name, char* value) {
     variables[currentVar].name = name;
@@ -24,5 +26,5 @@ char* getVal(char* name) {
         }
     }
 
-    return "0";
+    return "ni";
 }

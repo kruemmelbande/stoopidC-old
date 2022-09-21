@@ -46,14 +46,17 @@ int main(int argc, char** argv) {
 
     for (int i = 0; i < size; i++) {
         char* currentKeyword = split(buf2[i], ':', 0);
-            
+
+        printf("%s\n", buf2[i]);
+
         if(!strcmp(currentKeyword, "var")) {
             printf("Test: var\n");
-            newVar("deez", "nuts");
-            printf("%s\n", getVal("deez"));
+            
+            newVar(split(split(buf2[i], ':', 1), '=', 0), split(split(buf2[i], ':', 1), '=', 1));
+            // printf("variable: %s\n", getVal(split(split(buf2[i], ':', 1), '=', 0)));
         } else if(!strcmp(currentKeyword, "out")) {
             printf("Test: out\n");
-        } else if(!startsWith(buf2[i], "#") && !strcmp(buf2[i], " ")) {
+        } else if(!startsWith(buf2[i], "#") && strcmp(buf2[i], "\0") > 0) {
             printf("Keyword %s not Found\n", currentKeyword);
             return 1;
         }
