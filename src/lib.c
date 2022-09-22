@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include <stdarg.h>
-#include <time.h>
-#include <unistd.h>
 #include "lib.h"
-
-static int lineLimit = 256;
+#include "global.h"
 
 int startsWith(char* str, char* pre) {
     size_t lenpre = strlen(pre),
@@ -23,30 +18,41 @@ int getSize(char* str) {
 }
 
 char* split(char* str, char splitter, int index) {
-    char* out = malloc(lineLimit);
+    char* out = malloc(getSize(str));
 
-    for(int i = 0; i < getSize(str); i++) {
-        if(str[i] == splitter) {
-            index--;
-            if(index == 0) {
-                i++;
+    if(index == 0) {
+        int j = 0;
+    
+        for(int i = 0; i < getSize(str); i++) {
+            if(str[i] == splitter || str[i] == '\0') {
+                out[j] = '\0';
+                return out;
             }
+
+            out[j] = str[i];
+            j++;
         }
+    } else {
+        int j = index;
 
-        if(index == 0) {
-            int k = 0;
+        for(int i = 0; i < getSize(str); i++) {
+            if(str[i] == splitter) {
+                j -= 1;
+            }
 
-            for(int j = i; j < getSize(str); j++) {
-                if(str[j] == splitter || j + 1 >= getSize(str)) {
-                    out[k] = '\0';
-                    return out;
+            if(j == 0) {
+                int k = 1;
+                
+                while (str[k + i] != splitter && k + 1 < getSize(str) && str[k + i] != '\n') {
+                    out[k - 1] = str[k + i];
+                    k++;
                 }
 
-                out[k] = str[j];
-                k++;
+                out[k - 1] = '\0';
+                return out;
             }
         }
     }
 
-    return NULL;
+    return str;
 }

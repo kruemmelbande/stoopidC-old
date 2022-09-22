@@ -1,16 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include <stdarg.h>
-#include <time.h>
-#include <unistd.h>
 #include "lib.h"
-
-static int lineLimit = 256;
+#include "global.h"
+#include "variables.h"
 
 int main(int argc, char** argv) {
-
     //get the filename from the args
     char* filename = argv[1];
     if (filename == NULL) {
@@ -51,12 +46,12 @@ int main(int argc, char** argv) {
 
     for (int i = 0; i < size; i++) {
         char* currentKeyword = split(buf2[i], ':', 0);
-            
+
         if(!strcmp(currentKeyword, "var")) {
-            printf("Test: var\n");
+            newVar(split(split(buf2[i], ':', 1), '=', 0), split(split(buf2[i], ':', 1), '=', 1));
         } else if(!strcmp(currentKeyword, "out")) {
-            printf("Test: out\n");
-        } else if(!startsWith(buf2[i], "#")) {
+            printf("%s\n", getVal((split(buf2[i], ':', 1))));
+        } else if(!startsWith(buf2[i], "#") && strcmp(currentKeyword, " ") > 0) {
             printf("Keyword %s not Found\n", currentKeyword);
             return 1;
         }
