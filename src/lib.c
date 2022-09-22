@@ -18,7 +18,7 @@ int getSize(char* str) {
 }
 
 char* split(char* str, char splitter, int index) {
-    char* out = malloc(lineLimit + 1);
+    char* out = malloc(getSize(str));
 
     if(index == 0) {
         int j = 0;
@@ -42,13 +42,13 @@ char* split(char* str, char splitter, int index) {
 
             if(j == 0) {
                 int k = 1;
-
-                while (str[k + i] != splitter && str[k + i + 1] != '\0') {
+                
+                while (str[k + i] != splitter && k + 1 < getSize(str) && str[k + i] != '\n') {
                     out[k - 1] = str[k + i];
                     k++;
                 }
-                printf("out: %s\n", out);
-                out[k] = '\0';
+
+                out[k - 1] = '\0';
                 return out;
             }
         }

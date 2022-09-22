@@ -52,6 +52,7 @@ int main(int argc, char** argv) {
             
             newVar(split(split(buf2[i], ':', 1), '=', 0), split(split(buf2[i], ':', 1), '=', 1));
             printf("variable: %s\n", getVal("uwu"));
+            printf("comp: %d\n", strcmp(getVal("uwu"), "1"));
         } else if(!strcmp(currentKeyword, "out")) {
             printf("Test: out\n");
         } else if(!startsWith(buf2[i], "#") && strcmp(currentKeyword, " ") > 0) {
