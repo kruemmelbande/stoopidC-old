@@ -16,10 +16,10 @@ int main(int argc, char** argv) {
     char* logname = "";
     for (size_t i = 0; i < argc; i++)
     {
-        if (argv[i] == "--silent") {
+        if (strcmp(argv[i],"--silent") == 0) {
            log=1;
         }
-        if (argv[i] == "--log") {
+        if (strcmp(argv[i],"--log") == 0) {
            log=1;
            logname = argv[i+1];
         }
