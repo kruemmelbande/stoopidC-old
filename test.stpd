@@ -1,5 +1,8 @@
 var:uwu=1
+var:owo=69
 out:uwu
-
-joe:mama
+out:owo
+var:uwu=2
+out:uwu
+#joe:mama
 #owo

@@ -1,3 +1,3 @@
 #include "lib.h"
 
-int lineLimit = 256;
+const int lineLimit = 256;
