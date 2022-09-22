@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     for (size_t i = 0; i < argc; i++)
     {
         if (strcmp(argv[i],"--silent") == 0) {
-           log=1;
+           silent=1;
         }
         if (strcmp(argv[i],"--log") == 0) {
            log=1;
@@ -65,12 +65,12 @@ int main(int argc, char** argv) {
             newVar(split(split(buf2[i], ':', 1), '=', 0), split(split(buf2[i], ':', 1), '=', 1));
         } else if(!strcmp(currentKeyword, "out")) {
             if (log==1) {
-                fprintf(logf, "%s", getVal(split(buf2[i], ':', 1)));
+                fprintf(logf, "%s\n", getVal(split(buf2[i], ':', 1)));
             }
             if (silent==0) {
-                printf("%s", getVal(split(buf2[i], ':', 1)));
+                printf("%s\n", getVal(split(buf2[i], ':', 1)));
             }
-            printf("%s\n", getVal((split(buf2[i], ':', 1))));
+            
         } else if(!startsWith(buf2[i], "#") && strcmp(currentKeyword, " ") > 0) {
             printf("Keyword %s not Found\n", currentKeyword);
             return 1;
