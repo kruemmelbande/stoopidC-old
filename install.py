@@ -2,6 +2,7 @@ import sys,os
 import tkinter as tk
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
+import shutil
 installAccept=0
 
 #Before you ask, yes, this installer is very hacky, and yes, I know it's not the best way to do it,
