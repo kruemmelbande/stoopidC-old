@@ -4,6 +4,19 @@ import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
 installAccept=0
 
+#Before you ask, yes, this installer is very hacky, and yes, I know it's not the best way to do it,
+#but its good enough, and it works, so I'm not going to change it. (I couldnt anyway because this code is an unreadable mess)
+
+def resource_path(relative_path):#PyInstaller stuff
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 def cancelInstall(x=0):
     sys.exit()
 #open a tkinter window
@@ -11,10 +24,10 @@ root=tk.Tk()
 #set the font size
 root.option_add("*Font", "Helvetica 12")
 #set the title
-root.title("Stoopid Installer")
+root.title("StoopidC Installer")
 #set the icon
 try:
-    root.iconbitmap("icon.ico")
+    root.iconbitmap(resource_path("icon.ico"))#I think it might work now? idk
 except:
     pass
 #set the size
@@ -22,7 +35,7 @@ root.geometry("480x360")
 #make it not resizable
 root.resizable(0,0)
 #add a label
-label=tk.Label(root,text="Do you want to install stoopid?")
+label=tk.Label(root,text="Do you want to install StoopidC?")
 #allign to top left
 label.pack(anchor="nw",padx=5, pady=5)
 #add a yes and no button
