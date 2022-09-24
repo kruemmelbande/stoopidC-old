@@ -2,7 +2,7 @@ import sys,os
 import tkinter as tk
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
-import shutil
+import subprocess
 installAccept=0
 
 #Before you ask, yes, this installer is very hacky, and yes, I know it's not the best way to do it,
@@ -153,9 +153,10 @@ if installAccept:
     if (not installdir in cpath) and pathAdd:
         cpath+=";%s" % installdir
         #print(cpath)
-        command="setx PATH \"%s\"" % cpath
-        print(command)
-        os.system(command)
+        #command="setx PATH \"%s\"" % cpath
+        subprocess.call(["setx","PATH",cpath])
+        #print(command)
+        #os.system(command)
         print("Added %s to PATH" % installdir)
         print("You can now run stoopid by typing stoopid in your terminal")
     else:
